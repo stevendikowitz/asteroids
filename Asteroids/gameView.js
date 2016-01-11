@@ -17,7 +17,7 @@
     //this function will update the position of all the circles,
     //clear the canvas, and redraw them
     window.setInterval( function () {
-      this.game.moveObjects();
+      this.game.step();
       this.game.draw(this.ctx);
     }, 20);
 

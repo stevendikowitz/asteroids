@@ -57,7 +57,24 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     while (origX < 0) { origX += DIM_X; }
     while (origY > DIM_Y) { origY -= DIM_Y; }
     while (origY < 0) { origY += DIM_Y; }
-    
+
     return [origX, origY];
   };
+
+  Game.prototype.checkCollisions = function () {
+    for (var i = 0; i < this.asteroids.length - 1; i++) {
+      for (var j = i + 1; j < this.asteroids.length; j++) {
+        if (this.asteroids[i].isCollidedWith(this.asteroids[j])) {
+          return alert("COLLISION");
+        }
+      }
+    }
+  };
+
+  Game.prototype.step = function () {
+    this.moveObjects();
+    this.checkCollisions();
+  };
+
+
 })();

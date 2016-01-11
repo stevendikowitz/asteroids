@@ -40,31 +40,13 @@
     // debugger;
     this.pos = this.game.wrap([posX, posY]);
   };
-  //
-  // MovingObject.randomCircle = function (maxX, maxY, numCircles) {
-  //   return new Circle(
-  //     maxX * Math.random(),
-  //     maxY * Math.random(),
-  //     Circle.radius(maxX, maxY, numCircles),
-  //     Circle.randomColor()
-  //   );
-  // };
-  //
-  // var HEX_DIGITS = "0123456789ABCDEF";
-  // MovingObject.randomColor = function () {
-  //   var color = "#";
-  //   for (var i = 0; i < 6; i++) {
-  //     color += HEX_DIGITS[Math.floor((Math.random() * 16))];
-  //   }
-  //
-  //   return color;
-  // };
-  //
-  // MovingObject.radius = function (maxX, maxY, numCircles) {
-  //   var targetCircleArea = (maxX * maxY) / numCircles;
-  //   var targetRadius = Math.sqrt(targetCircleArea / Math.PI);
-  //   return 2 * targetRadius;
-  // };
-  //
+
+  MovingObject.prototype.isCollidedWith = function (otherObject) {
+    var distObjs = Asteroids.Util.dist(this.pos, otherObject.pos);
+
+    return distObjs < (this.radius + otherObject.radius);
+  };
+
+
 
 })();

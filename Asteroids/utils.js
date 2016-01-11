@@ -21,4 +21,10 @@
     return [(randX * length), (randY * length)];
   };
 
+  Util.dist = function (objOnePos, objTwoPos) {
+    var diffX = objOnePos[0] - objTwoPos[0];
+    var diffY = objOnePos[1] - objTwoPos[1];
+
+    return Math.sqrt((diffX * diffX) + (diffY * diffY));
+  };
 })();
