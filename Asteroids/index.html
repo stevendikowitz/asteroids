@@ -16,19 +16,22 @@
   </head>
 
   <body>
-    <canvas></canvas>
+    <canvas id="game-canvas" width="800" height="600"></canvas>
 
+    <script src="utils.js"></script>
     <script src="movingObject.js"></script>
     <script src="asteroid.js"></script>
-    <!-- <script src="game.js"></script> -->
+    <script src="game.js"></script>
+    <script src="gameView.js"></script>
     <script>
-      var canvasEl = document.getElementsByTagName("canvas")[0];
-      canvasEl.height = 600;
-      canvasEl.width = 800;
-      // new Asteroids.Game(
-      //   canvasEl.width,
-      //   canvasEl.height
-      // ).start(canvasEl);
+      var game = new Asteroids.Game();
+      var canvasEl = document.getElementById("game-canvas");
+      var ctx = canvasEl.getContext("2d");
+      new Asteroids.GameView(
+        game,
+        ctx
+      ).start(canvasEl);
     </script>
   </body>
+
 </html>

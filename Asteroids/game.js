@@ -14,6 +14,12 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   var DIM_Y = 600;
   var NUM_ASTEROIDS = 4;
 
+  var Game = Asteroids.Game = function () {
+    this.asteroids = [];
+    for (var i = 0; i < NUM_ASTEROIDS; i++) {
+      this.asteroids.push(this.addAsteroids());
+    }
+  };
 
   Asteroids.Game.prototype.randPosition = function () {
     var xPos = Math.random() * DIM_X;
@@ -28,14 +34,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     //   this.radius = 30;
     //   this.color = "#808080";
     // };
-    var newAsteroid = new Asteroid({pos: randPosition()});
-  };
-
-  var Game = Asteroids.Game = function () {
-    this.asteroids = [];
-    for (var i = 0; i < NUM_ASTEROIDS; i++) {
-      asteroids.push(addAsteroids);
-    }
+    return new Asteroids.Asteroid({pos: this.randPosition()});
   };
 
   Game.prototype.draw = function (ctx) {
@@ -48,6 +47,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Game.prototype.moveObjects = function () {
+    // debugger;
     this.asteroids.forEach(function(asteroid) {
       asteroid.move();
     });

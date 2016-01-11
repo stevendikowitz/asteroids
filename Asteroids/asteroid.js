@@ -11,8 +11,7 @@
     this.color = "#808080";
   };
 
+  Asteroids.Util.inherits(Asteroid, Asteroids.MovingObject);
 
-  Asteroids.Util.inherits(Asteroid, MovingObject);
 
-
-  })();
+})();
