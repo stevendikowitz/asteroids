@@ -14,4 +14,11 @@
     childClass.prototype.constructor = childClass;
   };
 
+  Util.prototype.randomVec = function (length) {
+    var randX = (Math.random() * 2) - 1;
+    var randY = (Math.random() * 2) - 1;
+
+    return [randX, randY] * length;
+  };
+
 })();
