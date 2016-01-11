@@ -28,13 +28,8 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Asteroids.Game.prototype.addAsteroids = function () {
-    // var Asteroid = Asteroids.Asteroid = function (attr) {
-    //   this.pos = attr.pos;
-    //   this.vel = Asteroids.Util.randomVec(1);
-    //   this.radius = 30;
-    //   this.color = "#808080";
-    // };
-    return new Asteroids.Asteroid({pos: this.randPosition()});
+
+    return new Asteroids.Asteroid({pos: this.randPosition(), game: this});
   };
 
   Game.prototype.draw = function (ctx) {
@@ -47,10 +42,22 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Game.prototype.moveObjects = function () {
-    // debugger;
+
     this.asteroids.forEach(function(asteroid) {
       asteroid.move();
     });
 
+  };
+
+  Game.prototype.wrap = function (pos) {
+    var origX = pos[0];
+    var origY = pos[1];
+
+    while (origX > DIM_X) { origX -= DIM_X; }
+    while (origX < 0) { origX += DIM_X; }
+    while (origY > DIM_Y) { origY -= DIM_Y; }
+    while (origY < 0) { origY += DIM_Y; }
+    
+    return [origX, origY];
   };
 })();

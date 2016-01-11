@@ -9,6 +9,7 @@
     this.vel = attrs.vel;
     this.radius = attrs.radius;
     this.color = attrs.color;
+    this.game = attrs.game;
   };
 
   MovingObject.prototype.draw = function (ctx) {
@@ -36,7 +37,8 @@
 
     var posX = origX + dx;
     var posY = origY + dy;
-    this.pos = [posX, posY];
+    // debugger;
+    this.pos = this.game.wrap([posX, posY]);
   };
   //
   // MovingObject.randomCircle = function (maxX, maxY, numCircles) {
