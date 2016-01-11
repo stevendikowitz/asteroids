@@ -49,7 +49,23 @@ var curriedSum = function (numArgs) {
 };
 
 
-Function.prototype.curry = function () {
+Function.prototype.curry = function (numArgs) {
+  var fn = this;
+  var myArgs = [];
+
+  var _curry = function (arg) {
+    myArgs.push(arg);
+
+    if (myArgs.length === numArgs) {
+      return fn.apply(this, myArgs);
+    }
+    else {
+      return _curry;
+    }
+
+  };
+
+  return _curry;
 };
 
 function sumThree(num1, num2, num3) {
