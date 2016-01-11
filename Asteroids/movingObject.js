@@ -48,9 +48,12 @@
   };
 
   MovingObject.prototype.collideWith = function (otherObject) {
-    // body...
-    this.game.remove(this);
-    this.game.remove(otherObject);
+    // this.game.remove(this);
+    // this.game.remove(otherObject);
+    if (this === this.game.ship || otherObject === this.game.ship) {
+      return Asteroids.Ship.relocate();
+    }
+
   };
 
 

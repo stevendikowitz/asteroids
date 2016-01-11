@@ -15,6 +15,10 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   var NUM_ASTEROIDS = 4;
 
   var Game = Asteroids.Game = function () {
+    this.dim_x = DIM_X;
+    this.dim_y = DIM_Y;
+    this.ship = new Asteroids.Ship ({pos: [DIM_X / 2, DIM_Y / 2], game: this});
+
     this.asteroids = [];
     for (var i = 0; i < NUM_ASTEROIDS; i++) {
       this.asteroids.push(this.addAsteroids());
@@ -32,19 +36,23 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     return new Asteroids.Asteroid({pos: this.randPosition(), game: this});
   };
 
+  Game.prototype.allObjects = function () {
+    return this.asteroids.concat(this.ship);
+  };
+
   Game.prototype.draw = function (ctx) {
     //this will empty the canvas
     ctx.clearRect(0, 0, DIM_X, DIM_Y);
 
-    this.asteroids.forEach(function (asteroid) {
-      asteroid.draw(ctx);
+    this.allObjects().forEach(function (object) {
+      object.draw(ctx);
     });
   };
 
   Game.prototype.moveObjects = function () {
-
-    this.asteroids.forEach(function(asteroid) {
-      asteroid.move();
+    // debugger;
+    this.allObjects().forEach(function (object) {
+      object.move();
     });
 
   };
@@ -62,12 +70,12 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Game.prototype.checkCollisions = function () {
-    for (var i = 0; i < this.asteroids.length - 1; i++) {
-      for (var j = i + 1; j < this.asteroids.length; j++) {
-        var firstAsteroid = this.asteroids[i];
-        var secondAsteroid = this.asteroids[j];
-        if (firstAsteroid.isCollidedWith(secondAsteroid)) {
-          firstAsteroid.collideWith(secondAsteroid);
+    for (var i = 0; i < this.allObjects.length - 1; i++) {
+      for (var j = i + 1; j < this.allObjects.length; j++) {
+        var firstObject = this.allObjects[i];
+        var secondObject = this.allObjects[j];
+        if (firstObject.isCollidedWith(secondObject)) {
+          firstObject.collideWith(secondObject);
         }
       }
     }
@@ -83,5 +91,6 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     var i = this.asteroids.indexOf(object);
     return this.asteroids.splice(i, 1);
   };
+
 
 })();
