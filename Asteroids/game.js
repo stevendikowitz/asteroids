@@ -64,8 +64,10 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   Game.prototype.checkCollisions = function () {
     for (var i = 0; i < this.asteroids.length - 1; i++) {
       for (var j = i + 1; j < this.asteroids.length; j++) {
-        if (this.asteroids[i].isCollidedWith(this.asteroids[j])) {
-          return alert("COLLISION");
+        var firstAsteroid = this.asteroids[i];
+        var secondAsteroid = this.asteroids[j];
+        if (firstAsteroid.isCollidedWith(secondAsteroid)) {
+          firstAsteroid.collideWith(secondAsteroid);
         }
       }
     }
@@ -76,5 +78,10 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     this.checkCollisions();
   };
 
+  Game.prototype.remove = function (object) {
+    // use splice to delete elements at index i...
+    var i = this.asteroids.indexOf(object);
+    return this.asteroids.splice(i, 1);
+  };
 
 })();

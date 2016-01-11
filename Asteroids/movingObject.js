@@ -47,6 +47,12 @@
     return distObjs < (this.radius + otherObject.radius);
   };
 
+  MovingObject.prototype.collideWith = function (otherObject) {
+    // body...
+    this.game.remove(this);
+    this.game.remove(otherObject);
+  };
+
 
 
 })();
