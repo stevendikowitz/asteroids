@@ -6,7 +6,18 @@ function sum () {
   return partSum;
 }
 
-function myBind (context) {
+// function myBind (context) {
+//   var fn = this;
+//   var bindArgs = [].slice.call(arguments, 1);
+//
+//   var myFunction = function () {
+//     var callArgs = [].slice.call(arguments);
+//     return fn.apply(context, bindArgs.concat(callArgs));
+//   };
+//
+//   return myFunction;
+// }
+Function.prototype.myBind = function (context) {
   var fn = this;
   var bindArgs = [].slice.call(arguments, 1);
 
@@ -16,38 +27,42 @@ function myBind (context) {
   };
 
   return myFunction;
-}
-
-// EXAMPLE BELOW
-
-function Cat(name) {
-  this.name = name;
-}
-Cat.prototype.says = function (sound, person) {
-  console.log(this.name + " says " + sound + " to " + person + "!");
-  return true;
 };
 
-markov = new Cat("Markov");
-breakfast = new Cat("Breakfast");
+// CURRYING
 
-markov.says("meow", "Ned");
-// Markov says meow to Ned!
-// true
+var curriedSum = function (numArgs) {
+  var nums = [];
+  var _curriedSum = function (num) {
+    nums.push(num);
+    if (nums.length === numArgs) {
+      var sum = 0;
+      for (var i = 0; i < nums.length; i++) {
+        sum += nums[i];
+      }
+      return sum;
+    } else {
+      return _curriedSum;
+    }
+  };
+  return _curriedSum;
+};
 
-markov.says.myBind(breakfast, "meow")("Kush");
-// Breakfast says meow to Kush!
-// true
 
-markov.says.myBind(breakfast)("meow", "a tree");
-// Breakfast says meow to a tree!
-// true
+Function.prototype.curry = function () {
+};
 
-markov.says.myBind(breakfast, "meow")("Markov");
-// Breakfast says meow to Markov!
-// true
+function sumThree(num1, num2, num3) {
+  return num1 + num2 + num3;
+}
 
-var notMarkovSays = markov.says.myBind(breakfast);
-notMarkovSays("meow", "me");
-// Breakfast says meow to me!
-// true
+sumThree(4, 20, 6); // == 30
+
+// you'll write `Function#curry`!
+var f1 = sumThree.curry(3);
+var f2 = f1(4);
+var f3 = f2(20);
+var result = f3(6); // = 30
+
+// or more briefly:
+sumThree.curry(3)(4)(20)(6); // == 30
