@@ -54,7 +54,7 @@ Function.prototype.curry = function (numArgs) {
     myArgs.push(arg);
 
     if (myArgs.length === numArgs) {
-      return fn.apply(myArgs);
+      return fn.apply(null, myArgs);
     }
     else {
       return _curry;
