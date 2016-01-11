@@ -29,8 +29,6 @@ Function.prototype.myBind = function (context) {
   return myFunction;
 };
 
-// CURRYING
-
 var curriedSum = function (numArgs) {
   var nums = [];
   var _curriedSum = function (num) {
@@ -48,7 +46,6 @@ var curriedSum = function (numArgs) {
   return _curriedSum;
 };
 
-
 Function.prototype.curry = function (numArgs) {
   var fn = this;
   var myArgs = [];
@@ -57,14 +54,12 @@ Function.prototype.curry = function (numArgs) {
     myArgs.push(arg);
 
     if (myArgs.length === numArgs) {
-      return fn.apply(this, myArgs);
+      return fn.apply(myArgs);
     }
     else {
       return _curry;
     }
-
   };
-
   return _curry;
 };
 
