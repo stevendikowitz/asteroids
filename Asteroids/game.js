@@ -70,10 +70,11 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Game.prototype.checkCollisions = function () {
-    for (var i = 0; i < this.allObjects.length - 1; i++) {
-      for (var j = i + 1; j < this.allObjects.length; j++) {
-        var firstObject = this.allObjects[i];
-        var secondObject = this.allObjects[j];
+    
+    for (var i = 0; i < this.allObjects().length - 1; i++) {
+      for (var j = i + 1; j < this.allObjects().length; j++) {
+        var firstObject = this.allObjects()[i];
+        var secondObject = this.allObjects()[j];
         if (firstObject.isCollidedWith(secondObject)) {
           firstObject.collideWith(secondObject);
         }

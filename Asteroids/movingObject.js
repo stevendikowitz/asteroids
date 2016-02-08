@@ -37,7 +37,7 @@
 
     var posX = origX + dx;
     var posY = origY + dy;
-    // debugger;
+
     this.pos = this.game.wrap([posX, posY]);
   };
 
@@ -48,10 +48,10 @@
   };
 
   MovingObject.prototype.collideWith = function (otherObject) {
-    // this.game.remove(this);
-    // this.game.remove(otherObject);
+    this.game.remove(this);
+    this.game.remove(otherObject);
     if (this === this.game.ship || otherObject === this.game.ship) {
-      return Asteroids.Ship.relocate();
+      return this.game.ship.relocate();
     }
 
   };
