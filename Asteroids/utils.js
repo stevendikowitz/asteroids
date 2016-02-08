@@ -14,6 +14,19 @@
     childClass.prototype.constructor = childClass;
   };
 
+  Util.dir = function (vec) {
+    var norm = Util.norm(vec);
+    return Util.scale(vec, 1 / norm);
+  };
+
+  Util.norm = function (vec) {
+   return Util.dist([0, 0], vec);
+ };
+
+  Util.scale = function (vec, m) {
+    return [vec[0] * m, vec[1] * m];
+  };
+
   Util.randomVec = function (length) {
     var randX = (Math.random() * 2) - 1;
     var randY = (Math.random() * 2) - 1;

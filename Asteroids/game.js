@@ -18,6 +18,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     this.dim_x = DIM_X;
     this.dim_y = DIM_Y;
     this.ship = new Asteroids.Ship ({pos: [DIM_X / 2, DIM_Y / 2], game: this});
+    this.bullets = [];
 
     this.asteroids = [];
     for (var i = 0; i < NUM_ASTEROIDS; i++) {
@@ -37,7 +38,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Game.prototype.allObjects = function () {
-    return this.asteroids.concat(this.ship);
+    return this.asteroids.concat(this.ship, this.bullets);
   };
 
   Game.prototype.draw = function (ctx) {
@@ -70,7 +71,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Game.prototype.checkCollisions = function () {
-    
+
     for (var i = 0; i < this.allObjects().length - 1; i++) {
       for (var j = i + 1; j < this.allObjects().length; j++) {
         var firstObject = this.allObjects()[i];
@@ -80,6 +81,24 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
         }
       }
     }
+  };
+
+  Game.prototype.isOutOfBounds = function (pos) {
+    return (pos[0] < 0) || (pos[1] < 0) ||
+      (pos[0] > DIM_X) || (pos[1] > DIM_Y);
+  };
+
+  Game.prototype.add = function (object) {
+
+    if (object instanceof Asteroids.Asteroid) {
+      this.asteroids.push(object);
+    } else if (object instanceof Asteroids.Bullet) {
+      this.bullets.push(object);
+    } else if (object instanceof Asteroids.Ship) {
+      this.ships.push(object);
+    }
+
+    
   };
 
   Game.prototype.step = function () {

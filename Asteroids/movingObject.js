@@ -28,6 +28,8 @@
     ctx.fill();
   };
 
+  MovingObject.prototype.isWrappable = true;
+
   MovingObject.prototype.move = function () {
     var origX = this.pos[0];
     var origY = this.pos[1];
@@ -38,7 +40,10 @@
     var posX = origX + dx;
     var posY = origY + dy;
 
-    this.pos = this.game.wrap([posX, posY]);
+
+      // if (this.isWrappable) {
+        this.pos = this.game.wrap([posX, posY]);
+      // }
   };
 
   MovingObject.prototype.isCollidedWith = function (otherObject) {
