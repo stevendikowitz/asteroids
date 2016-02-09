@@ -40,10 +40,14 @@
     var posX = origX + dx;
     var posY = origY + dy;
 
+    this.pos = [posX, posY];
+    if (this.game.isOutOfBounds(this.pos)) {
+      if (!this.isWrappable) {
+        return this.game.remove(this);
+      }
+    }
 
-      // if (this.isWrappable) {
-        this.pos = this.game.wrap([posX, posY]);
-      // }
+    this.pos = this.game.wrap(this.pos);
   };
 
   MovingObject.prototype.isCollidedWith = function (otherObject) {
@@ -55,7 +59,9 @@
   MovingObject.prototype.collideWith = function (otherObject) {
     this.game.remove(this);
     this.game.remove(otherObject);
-    if (this === this.game.ship || otherObject === this.game.ship) {
+    var idxOther = this.game.bullets.indexOf(otherObject);
+    var idxThis = this.game.bullets.indexOf(this);
+    if (this === this.game.ship && idxOther === -1 || otherObject === this.game.ship && idxThis === -1 ) {
       return this.game.ship.relocate();
     }
 
