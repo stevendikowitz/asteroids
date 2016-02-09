@@ -33,23 +33,43 @@
     });
   };
 
-  GameView.prototype.start = function (canvasEl) {
-    this.bindKeyHandlers();
-    // get a 2d canvas drawing context. The canvas API lets us call
-    // a `getContext` method on a canvas DOM element.
-    var ctx = canvasEl.getContext("2d");
+  // GameView.prototype.start = function (canvasEl) {
+  //   this.bindKeyHandlers();
+  //   // get a 2d canvas drawing context. The canvas API lets us call
+  //   // a `getContext` method on a canvas DOM element.
+  //   var ctx = canvasEl.getContext("2d");
+  //
+  //   //this function will update the position of all the circles,
+  //   //clear the canvas, and redraw them
+  //   window.setInterval( function () {
+  //     this.game.step();
+  //     this.game.draw(this.ctx);
+  //   }, 20);
+  //
+  //   this.lastTime = 0;
+  //
+  //   //this will cause the first render and start the endless triggering of
+  //   //the function using requestAnimationFrame
+  //   // intervalCallback();
+  // };
 
-    //this function will update the position of all the circles,
-    //clear the canvas, and redraw them
-    window.setInterval( function () {
-      this.game.step();
-      this.game.draw(this.ctx);
-    }, 20);
+  GameView.prototype.start = function () {
+     this.bindKeyHandlers();
+     this.lastTime = 0;
+     //start the animation
+     requestAnimationFrame(this.animate.bind(this));
+   };
 
-    //this will cause the first render and start the endless triggering of
-    //the function using requestAnimationFrame
-    // intervalCallback();
-  };
+   GameView.prototype.animate = function(time){
+     var timeDelta = time - this.lastTime;
+
+     this.game.step(timeDelta);
+     this.game.draw(this.ctx);
+     this.lastTime = time;
+
+     //every call to animate requests causes another call to animate
+     requestAnimationFrame(this.animate.bind(this));
+   };
 
 
 
