@@ -5,7 +5,7 @@
 
   var Bullet = Asteroids.Bullet = function (options) {
     options.radius = Bullet.RADIUS;
-
+    this.bullet = true;
     Asteroids.MovingObject.call(this, options);
   };
 

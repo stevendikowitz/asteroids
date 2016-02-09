@@ -47,23 +47,37 @@
       }
     }
 
+
+
     this.pos = this.game.wrap(this.pos);
   };
 
   MovingObject.prototype.isCollidedWith = function (otherObject) {
     var distObjs = Asteroids.Util.dist(this.pos, otherObject.pos);
-
     return distObjs < (this.radius + otherObject.radius);
   };
 
   MovingObject.prototype.collideWith = function (otherObject) {
-    this.game.remove(this);
-    this.game.remove(otherObject);
-    var idxOther = this.game.bullets.indexOf(otherObject);
-    var idxThis = this.game.bullets.indexOf(this);
-    if (this === this.game.ship && idxOther === -1 || otherObject === this.game.ship && idxThis === -1 ) {
-      return this.game.ship.relocate();
-    }
+    var ship = this.game.ship;
+    var asteroid = Asteroids.Asteroid;
+    // debugger
+    if (this !== ship && !otherObject.bullet ) {
+      this.game.remove(this);
+      this.game.remove(otherObject);
+     }
+
+     if (this.asteroid && otherObject.bullet || this.bullet && otherObject.asteroid) {
+       this.game.remove(this);
+       this.game.remove(otherObject);
+     }
+
+     if (this === ship && otherObject.asteroid) {
+       ship.relocate();
+       this.game.remove(otherObject);
+     } else if (this.asteroid && otherObject === ship) {
+       ship.relocate();
+       this.game.remove(this);
+     }
 
   };
 

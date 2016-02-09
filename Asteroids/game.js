@@ -67,6 +67,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     while (origY > DIM_Y) { origY -= DIM_Y; }
     while (origY < 0) { origY += DIM_Y; }
 
+
     return [origX, origY];
   };
 
@@ -98,7 +99,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
       this.ships.push(object);
     }
 
-    
+
   };
 
   Game.prototype.step = function () {
@@ -107,9 +108,14 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Game.prototype.remove = function (object) {
-    // use splice to delete elements at index i...
-    var i = this.asteroids.indexOf(object);
-    return this.asteroids.splice(i, 1);
+    var i;
+    if (object.asteroid) {
+      i = this.asteroids.indexOf(object);
+      if (i !== -1) {
+        this.asteroids.splice(i, 1);
+      }
+    }
+
   };
 
 
