@@ -115,7 +115,12 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
         this.asteroids.splice(i, 1);
       }
     }
-
+    if (object.bullet) {
+      i = this.bullets.indexOf(object);
+      if (i !== -1) {
+        this.bullets.splice(i, 1);
+      }
+    }
   };
 
 
