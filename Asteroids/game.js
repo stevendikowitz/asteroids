@@ -50,10 +50,9 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     });
   };
 
-  Game.prototype.moveObjects = function () {
-    // debugger;
+  Game.prototype.moveObjects = function (delta) {
     this.allObjects().forEach(function (object) {
-      object.move();
+      object.move(delta);
     });
 
   };

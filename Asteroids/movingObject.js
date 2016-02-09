@@ -30,12 +30,14 @@
 
   MovingObject.prototype.isWrappable = true;
 
-  MovingObject.prototype.move = function () {
+  MovingObject.prototype.move = function (delta) {
+    delta = delta || 1;
+
     var origX = this.pos[0];
     var origY = this.pos[1];
 
-    var dx = this.vel[0];
-    var dy = this.vel[1];
+    var dx = this.vel[0] * delta/5;
+    var dy = this.vel[1] * delta/5;
 
     var posX = origX + dx;
     var posY = origY + dy;
