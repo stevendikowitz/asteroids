@@ -9,6 +9,8 @@
     this.radius = 20;
     this.color = "#a1e5dd";
     this.game = attrs.game;
+    this.lastFire = Date.now();
+    this.angle = -90;
   };
 
   Asteroids.Util.inherits(Ship, Asteroids.MovingObject);
@@ -48,7 +50,33 @@
         game: this.game
       });
 
-      this.game.add(bullet);
+      if (Date.now() - this.lastFire > 500 || this.game.bullets.length === 1 ) {
+        this.game.add(bullet);
+        this.lastFire = Date.now();
+      }
+
+    };
+
+    Ship.sprite = new Image();
+
+
+    Ship.prototype.draw = function(ctx){
+
+
+      ctx.save();
+      ctx.translate(this.pos[0], this.pos[1]);
+
+      ctx.rotate((this.angle + 90) * Math.PI/180);
+
+      Ship.sprite.src = './assets/falcon.png';
+
+      // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      ctx.drawImage(Ship.sprite, 0, 0, 40, 40, 60, 60, 400, 400);
+
+
+      ctx.restore();
+
+
     };
 
 
