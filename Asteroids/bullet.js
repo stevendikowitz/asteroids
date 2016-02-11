@@ -3,14 +3,47 @@
     window.Asteroids = {};
   }
 
-  var Bullet = Asteroids.Bullet = function (options) {
-    options.radius = Bullet.RADIUS;
-    this.bullet = true;
-    Asteroids.MovingObject.call(this, options);
+  RADIUS = 2;
+  SPEED = 15;
+  COLOR = "#b6e4a6";
+
+  var Bullet = Asteroids.Bullet = function (bulletOptions) {
+    var vel = bulletOptions.vel,
+        angle = bulletOptions.angle,
+        thrust = bulletOptions.thrust;
+    // options.radius = Bullet.RADIUS;
+    // this.bullet = true;
+    // Asteroids.MovingObject.call(this, options);
+
+    var newVel = Asteroids.Util.calcVec(1, angle);
+
+    this.vel = [vel[0]*8, vel[1]*8];
+        // this.pos = [(pos[0] + (vel[0]*10)), (pos[1] + (vel[1]*10))];
+    if ( (vel[0] === 0 && vel[1] === 0) ) {
+        newVel = Asteroids.Util.calcVec(0.70, angle);
+        this.vel[0] = newVel[0]*10;
+        this.vel[1] = newVel[1]*10;
+      }
+    else if ( !thrust ) {
+      newVel = Asteroids.Util.calcVec(Asteroids.Util.norm(vel), angle);
+      if (Math.abs(newVel[0]) > 2.5 || Math.abs(newVel[1]) > 2.5) {
+        this.vel = [(newVel[0]*3), (newVel[1]*3)];
+
+      } else {
+        newVel = Asteroids.Util.calcVec(0.70, -angle);
+        this.vel[0] = newVel[0]*10;
+        this.vel[1] = newVel[1]*10;
+      }
+    }
+    //
+    this.radius = RADIUS;
+    this.speed = SPEED;
+    this.pos = bulletOptions.pos;
+    this.color = COLOR;
+    this.game = bulletOptions.game;
+
   };
 
-  Bullet.RADIUS = 2;
-  Bullet.SPEED = 15;
 
   Asteroids.Util.inherits(Bullet, Asteroids.MovingObject);
 

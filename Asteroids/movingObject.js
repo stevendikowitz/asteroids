@@ -60,6 +60,7 @@
   };
 
   MovingObject.prototype.collideWith = function (otherObject) {
+    
     var ship = this.game.ship;
     var asteroid = Asteroids.Asteroid;
     // debugger

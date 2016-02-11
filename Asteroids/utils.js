@@ -40,4 +40,15 @@
 
     return Math.sqrt((diffX * diffX) + (diffY * diffY));
   };
+
+  Util.calcVec = function(speed, angle) {
+    var x,
+        y;
+
+    x = 1 * Math.cos(angle/180 * Math.PI);
+    y = 1 * Math.sin(angle/180 * Math.PI);
+
+   return [x,y];
+  };
+
 })();

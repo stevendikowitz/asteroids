@@ -17,9 +17,7 @@
 
   // Asteroid.sprite = new Image();
   //
-  //
   // Asteroid.prototype.draw = function(ctx){
-  //
   //
   //   ctx.save();
   //   ctx.translate(this.pos[0], this.pos[1]);
@@ -27,7 +25,7 @@
   //   ctx.rotate((this.angle + 90) * Math.PI/180);
   //
   //   Asteroid.sprite.src = './assets/deathstar.png';
-  // 
+  //
   //   // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
   //   if (this.radius === 30){
   //
@@ -38,7 +36,6 @@
   //   }
   //
   //   ctx.restore();
-  //
   //
   // };
 

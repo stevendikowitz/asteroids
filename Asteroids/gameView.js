@@ -24,14 +24,46 @@
     var ship = this.ship;
 
     Object.keys(GameView.MOVES).forEach(function(k) {
-      var move = GameView.MOVES[k];
-      key(k, function () {
-        ship.power(move);
-      });
+      // var move = GameView.MOVES[k];
+      // key(k, function () {
+      //   ship.power(move);
+      // });
 
       key('space', function () {ship.fireBullet();});
     });
   };
+
+
+  $(document).on('keydown', this, function (e) {
+    var char = String.fromCharCode(e.keyCode),
+        ship = this.game.ship;
+
+    if (char.toLowerCase() === "a" || char === "%" ) {
+      ship.leftTurn = true;
+    } else if ( char.toLowerCase() === "d" || char === "'" ) {
+      ship.rightTurn = true;
+    }
+
+    if ( char.toLowerCase() === "w" || char === "&") {
+      ship.thrust = true;
+    }
+  }.bind(this));
+
+  $(document).on('keyup', this, function (e) {
+    var char = String.fromCharCode(e.keyCode),
+        ship = this.game.ship;
+
+    if ( char.toLowerCase() === "a" || char === "%" ) {
+      ship.leftTurn = false;
+    } else if ( char.toLowerCase() === "d" || char === "'" ) {
+      ship.rightTurn = false;
+    }
+
+    if ( char.toLowerCase() === "w" || char === "&" ) {
+      ship.thrust = false;
+    }
+
+  }.bind(this));
 
   GameView.prototype.start = function () {
      this.bindKeyHandlers();
@@ -50,10 +82,6 @@
      //every call to animate requests causes another call to animate
      requestAnimationFrame(this.animate.bind(this));
    };
-
-
-
-
 
 
 })();
