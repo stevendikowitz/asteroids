@@ -19,6 +19,10 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     this.dim_y = DIM_Y;
     this.ship = new Asteroids.Ship ({pos: [DIM_X / 2, DIM_Y / 2], game: this});
     this.bullets = [];
+    this.level = 1;
+    this.lives = 3;
+    this.gameOver = false;
+    this.score = 0;
 
     this.asteroids = [];
     for (var i = 0; i < NUM_ASTEROIDS; i++) {
@@ -112,6 +116,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
       i = this.asteroids.indexOf(object);
       if (i !== -1) {
         this.asteroids.splice(i, 1);
+        this.score += 100;
       }
     }
     if (object.bullet) {
@@ -120,6 +125,26 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
         this.bullets.splice(i, 1);
       }
     }
+
+    if (object === this.ship) {
+      this.lives -= 1;
+    }
+  };
+
+
+  Game.prototype.draw = function (ctx) {
+    ctx.save();
+    ctx.clearRect(0,0, ctx.canvas.width,ctx.canvas.height);
+      ctx.fillStyle = "#fff";
+      ctx.font="20px Arial";
+      ctx.fillText("Level: " + this.level,(ctx.canvas.width / 2) - 50,20);
+      ctx.fillText("Asteroids remaining: " + this.asteroids.length,30,20);
+      ctx.fillText("Score: " + this.score,ctx.canvas.width - 200,20);
+      ctx.fillText("Lives:  " + this.lives, ctx.canvas.width - 200,50);
+    ctx.restore();
+    this.allObjects().forEach(function(obj){
+      obj.draw(ctx);
+    });
   };
 
 

@@ -60,7 +60,7 @@
   };
 
   MovingObject.prototype.collideWith = function (otherObject) {
-    
+
     var ship = this.game.ship;
     var asteroid = Asteroids.Asteroid;
     // debugger
@@ -75,11 +75,13 @@
      }
 
      if (this === ship && otherObject.asteroid) {
+       this.game.remove(ship);
        ship.relocate();
        this.game.remove(otherObject);
      } else if (this.asteroid && otherObject === ship) {
        ship.relocate();
        this.game.remove(this);
+       this.game.remove(ship);
      }
 
   };
