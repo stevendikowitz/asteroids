@@ -6,11 +6,11 @@
   var Ship = Asteroids.Ship = function (attrs) {
     this.pos = attrs.pos;
     this.vel = [0, 0];
-    this.radius = 20;
+    this.radius = 40;
     this.color = "#a1e5dd";
     this.game = attrs.game;
     this.lastFire = Date.now();
-    this.angle = -90;
+    this.angle = 0;
     this.rotateSpeed = 1;
     this.leftTurn = false;
     this.rightTurn = false;
@@ -36,9 +36,9 @@
 
 
     Ship.prototype.fireBullet = function () {
-      var norm = Asteroids.Util.norm(this.vel);
+      // var norm = Asteroids.Util.norm(this.vel);
 
-      if (norm === 0 || Date.now() - this.lastFire < 700) {
+      if ( Date.now() - this.lastFire < 700) {
         return;
       }
 
@@ -53,11 +53,11 @@
       //
       //
 
-      var newPos = [this.pos[0], this.pos[1]],
-          addPos = Asteroids.Util.calcVec(this.radius, this.angle);
-
-      newPos[0] += addPos[0]*1.5;
-      newPos[1] += addPos[1]*1.5;
+      // var newPos = [this.pos[0], this.pos[1]],
+      //     addPos = Asteroids.Util.calcVec(this.radius, this.angle);
+      //
+      // newPos[0] += addPos[0]*1.5;
+      // newPos[1] += addPos[1]*1.5;
 
       var forwardPos = [
         (this.pos[0] + Math.sin(this.angle/180 * Math.PI) * 1),
@@ -86,7 +86,7 @@
 
 
       var bulletOptions = {
-        vel: this.vel,
+        vel: [this.vel[0] * 3, this.vel[1] * 3],
         pos: forwardPos,
         game: this.game,
         radius: this.radius,
@@ -103,15 +103,15 @@
       var vel;
 
       if ( this.leftTurn ) {
-        this.setAngle(-3);
+        this.setAngle(-2);
       } else if ( this.rightTurn ) {
-        this.setAngle(3);
+        this.setAngle(2);
       }
 
       if ( this.thrust ) {
 
         this.friction = 1;
-        vel = Asteroids.Util.calcVec(this.vel, this.angle);
+        vel = Asteroids.Util.calcVec(1, this.angle);
 
         this.pos[0] += this.vel[0] + vel[0];
         this.pos[1] += this.vel[1] + vel[1];
@@ -130,25 +130,25 @@
       }
     };
 
-    // Ship.sprite = new Image();
-    //
-    // Ship.prototype.draw = function(ctx){
-    //
-    //   ctx.save();
-    //   ctx.translate(this.pos[0], this.pos[1]);
-    //
-    //   ctx.rotate((this.angle + 90) * Math.PI/180);
-    //
-    //   Ship.sprite.src = './assets/falcon.png';
-    //
-    //   // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-    //   ctx.drawImage(Ship.sprite, 0, 0, 70, 70);
-    //
-    //
-    //   ctx.restore();
-    //
-    //
-    // };
+    Ship.sprite = new Image();
+
+    Ship.prototype.draw = function(ctx){
+
+      ctx.save();
+      ctx.translate(this.pos[0], this.pos[1]);
+
+      ctx.rotate((this.angle + 90) * Math.PI/180);
+
+      Ship.sprite.src = './assets/falcon.png';
+
+      // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      // ctx.drawImage(Ship.sprite, 10, 20, 20, 20, 10, 10, 40, 40);
+      ctx.drawImage(Ship.sprite, -40, -10, 70, 80);
+      // ctx.drawImage(Ship.sprite, 0, 0, 70, 70, -30, -30, 64, 64);
+      ctx.restore();
+
+
+    };
 
 
   })();

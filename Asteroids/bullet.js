@@ -15,7 +15,7 @@
     // this.bullet = true;
     // Asteroids.MovingObject.call(this, options);
 
-    var newVel = Asteroids.Util.calcVec(1, angle);
+    var newVel = Asteroids.Util.calcVec(0.65, angle);
 
     this.vel = [vel[0]*8, vel[1]*8];
         // this.pos = [(pos[0] + (vel[0]*10)), (pos[1] + (vel[1]*10))];
@@ -30,7 +30,7 @@
         this.vel = [(newVel[0]*3), (newVel[1]*3)];
 
       } else {
-        newVel = Asteroids.Util.calcVec(0.70, -angle);
+        newVel = Asteroids.Util.calcVec(0.70, angle);
         this.vel[0] = newVel[0]*10;
         this.vel[1] = newVel[1]*10;
       }
