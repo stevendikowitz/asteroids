@@ -77,6 +77,9 @@
        ship.relocate();
        game.remove(this);
        game.remove(ship);
+     } else if ( this.asteroid && otherObject.asteroid ) {
+       game.remove(this);
+       game.remove(otherObject);
      }
 
   };

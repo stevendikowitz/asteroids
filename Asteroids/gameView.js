@@ -7,6 +7,7 @@
     this.game = game;
     this.ctx = ctx;
     this.ship = this.game.ship;
+    this.dims = this.game.dims;
   };
 
   GameView.MOVES = {
@@ -21,54 +22,54 @@
   };
 
   GameView.prototype.bindKeyHandlers = function () {
-    var ship = this.ship;
+    var ship = this.ship,
+        that = this,
+        game = this.game;
 
     Object.keys(GameView.MOVES).forEach(function(k) {
-      // var move = GameView.MOVES[k];
-      // key(k, function () {
-      //   ship.power(move);
-      // });
-
       key('space', function () {ship.fireBullet();});
     });
+
+    $(document).on('keydown', this, function (e) {
+      var char = String.fromCharCode(e.keyCode);
+
+      if (char.toLowerCase() === "a" || char === "%" ) {
+        ship.leftTurn = true;
+      } else if ( char.toLowerCase() === "d" || char === "'" ) {
+        ship.rightTurn = true;
+      }
+
+      if ( char.toLowerCase() === "w" || char === "&") {
+        ship.thrust = true;
+      }
+
+      if ( e.keyCode === 13 ) {
+        game.stop = false;
+        game.gameOver = false;
+        $(".new-game").removeClass("is-active");
+        $(".game-over").removeClass("is-active");
+        that.animate();
+      }
+    }.bind(this));
+
+    $(document).on('keyup', this, function (e) {
+      var char = String.fromCharCode(e.keyCode);
+
+      if ( char.toLowerCase() === "a" || char === "%" ) {
+        ship.leftTurn = false;
+      } else if ( char.toLowerCase() === "d" || char === "'" ) {
+        ship.rightTurn = false;
+      }
+
+      if ( char.toLowerCase() === "w" || char === "&" ) {
+        ship.thrust = false;
+      }
+
+    }.bind(this));
   };
 
 
-  $(document).on('keydown', this, function (e) {
-    var char = String.fromCharCode(e.keyCode),
-        ship = this.game.ship;
 
-    if (char.toLowerCase() === "a" || char === "%" ) {
-      ship.leftTurn = true;
-    } else if ( char.toLowerCase() === "d" || char === "'" ) {
-      ship.rightTurn = true;
-    }
-
-    if ( char.toLowerCase() === "w" || char === "&") {
-      ship.thrust = true;
-    }
-
-    if ( e.keyCode === 13 ) {
-      this.game.stop = false;
-      $(".new-game").removeClass("is-active");
-    }
-  }.bind(this));
-
-  $(document).on('keyup', this, function (e) {
-    var char = String.fromCharCode(e.keyCode),
-        ship = this.game.ship;
-
-    if ( char.toLowerCase() === "a" || char === "%" ) {
-      ship.leftTurn = false;
-    } else if ( char.toLowerCase() === "d" || char === "'" ) {
-      ship.rightTurn = false;
-    }
-
-    if ( char.toLowerCase() === "w" || char === "&" ) {
-      ship.thrust = false;
-    }
-
-  }.bind(this));
 
   GameView.prototype.start = function () {
      this.bindKeyHandlers();
@@ -94,6 +95,10 @@
    GameView.prototype.gameOver = function(){
      this.game.stop = true;
      $(".game-over").addClass("is-active");
+     var newGame = new Asteroids.Game(this.dims);
+     newGame.stop = true;
+     newGame.gameOver = false;
+     new GameView(newGame, this.ctx).start();
    };
 
 })();

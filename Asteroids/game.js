@@ -15,15 +15,16 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   var NUM_ASTEROIDS = 6;
 
   var Game = Asteroids.Game = function (dims) {
-    this.DIM_X = 800;
-    this.DIM_Y = 600;
+    this.dims = dims;
+    this.DIM_X = dims.DIM_X;
+    this.DIM_Y = dims.DIM_Y;
     this.ship = new Asteroids.Ship ({pos: [this.DIM_X / 2, this.DIM_Y / 2], game: this});
     this.bullets = [];
     this.level = 1;
     this.lives = 3;
     this.gameOver = false;
     this.score = 0;
-    this.stop = false;
+    this.stop = true;
 
     this.asteroids = [];
     for (var i = 0; i < NUM_ASTEROIDS; i++) {
@@ -38,7 +39,6 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Asteroids.Game.prototype.addAsteroids = function () {
-
     return new Asteroids.Asteroid({pos: this.randPosition(), game: this});
   };
 
