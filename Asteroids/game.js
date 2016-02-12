@@ -10,14 +10,12 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     window.Asteroids = {};
   }
 
-  var DIM_X = 800;
-  var DIM_Y = 600;
   var NUM_ASTEROIDS = 6;
 
-  var Game = Asteroids.Game = function () {
-    this.dim_x = DIM_X;
-    this.dim_y = DIM_Y;
-    this.ship = new Asteroids.Ship ({pos: [DIM_X / 2, DIM_Y / 2], game: this});
+  var Game = Asteroids.Game = function (dims) {
+    this.DIM_X = dims.DIM_X;
+    this.DIM_Y = dims.DIM_Y;
+    this.ship = new Asteroids.Ship ({pos: [this.DIM_X / 2, this.DIM_Y / 2], game: this});
     this.bullets = [];
     this.level = 1;
     this.lives = 3;
@@ -32,8 +30,8 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   };
 
   Asteroids.Game.prototype.randPosition = function () {
-    var xPos = Math.random() * DIM_X;
-    var yPos = Math.random() * DIM_Y;
+    var xPos = Math.random() * this.DIM_X;
+    var yPos = Math.random() * this.DIM_Y;
     return [xPos, yPos];
   };
 
@@ -48,7 +46,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
 
   Game.prototype.draw = function (ctx) {
     //this will empty the canvas
-    ctx.clearRect(0, 0, DIM_X, DIM_Y);
+    ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
 
     this.allObjects().forEach(function (object) {
       object.draw(ctx);
@@ -70,10 +68,10 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     var origX = pos[0];
     var origY = pos[1];
 
-    while (origX > DIM_X) { origX -= DIM_X; }
-    while (origX < 0) { origX += DIM_X; }
-    while (origY > DIM_Y) { origY -= DIM_Y; }
-    while (origY < 0) { origY += DIM_Y; }
+    while (origX > this.DIM_X) { origX -= this.DIM_X; }
+    while (origX < 0) { origX += this.DIM_X; }
+    while (origY > this.DIM_Y) { origY -= this.DIM_Y; }
+    while (origY < 0) { origY += this.DIM_Y; }
 
 
     return [origX, origY];
@@ -94,7 +92,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
 
   Game.prototype.isOutOfBounds = function (pos) {
     return (pos[0] < 0) || (pos[1] < 0) ||
-      (pos[0] > DIM_X) || (pos[1] > DIM_Y);
+      (pos[0] > this.DIM_X) || (pos[1] > this.DIM_Y);
   };
 
   Game.prototype.add = function (object) {

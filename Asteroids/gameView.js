@@ -7,7 +7,6 @@
     this.game = game;
     this.ctx = ctx;
     this.ship = this.game.ship;
-
   };
 
   GameView.MOVES = {

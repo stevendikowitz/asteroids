@@ -46,8 +46,11 @@
     <script src="ship.js"></script>
     <script src="gameView.js"></script>
     <script>
-      var game = new Asteroids.Game();
       var canvasEl = document.getElementById("game-canvas");
+      canvasEl.width = window.innerWidth;
+      canvasEl.height = window.innerHeight;
+      var dims = {DIM_X: canvasEl.width, DIM_Y: canvasEl.height};
+      var game = new Asteroids.Game(dims);
       var ctx = canvasEl.getContext("2d");
       new Asteroids.GameView(
         game,
