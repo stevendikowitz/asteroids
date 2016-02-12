@@ -5,9 +5,17 @@
 
     <style>
       html, body, canvas {
-        padding: 0px;
-        margin: 0px;
-        font-family: 'ARCADECLASSIC';
+        padding: 0;
+        border: 0;
+        margin: 0;
+        outline: 0;
+        font: inherit;
+        box-sizing: inherit;
+        text-align: inherit;
+        text-decoration: inherit;
+        vertical-align: baseline;
+        color: inherit;
+        background: transparent;
       }
 
       @font-face {
@@ -39,9 +47,23 @@
         padding: 50px;
         margin-left: -250px;
         transform: translateY(-50%);
-        background: #ccc;
+        background: -webkit-linear-gradient(top, #fff, #ccc);
+        box-shadow: 0 2px 3px rgba(0,0,0,0.3);
         border-radius: 5px;
         max-height: 300px;
+        letter-spacing: 1px;
+      }
+
+      .modal > h1 {
+        font-size: 60px;
+        text-align: center;
+        margin-top: -30px;
+        margin-bottom: 0;
+      }
+
+      .modal > p {
+        padding: 0;
+        margin: 0;
       }
 
       .new-game {
@@ -75,7 +97,7 @@
       var canvasEl = document.getElementById("game-canvas");
       canvasEl.width = window.innerWidth;
       canvasEl.height = window.innerHeight;
-      var dims = {DIM_X: canvasEl.width - 100, DIM_Y: canvasEl.height - 100};
+      var dims = {DIM_X: canvasEl.width, DIM_Y: canvasEl.height};
       // debugger
       var game = new Asteroids.Game(dims);
       // var game = new Asteroids.Game();
@@ -86,18 +108,16 @@
       ).start(canvasEl);
     </script>
     <div class="modal new-game is-active">
-      <header>
       <h1>asteroids</h1>
       <p>move and turn with wad or arrow keys<p>
       <p>space to fire</p>
       <p>enter to start</p>
-      </header>
+
     </div>
 
       <div class="modal game-over">
-        <header>
-          <h1>game over!</h1>
-        </header>
+        <h1>game over!</h1>
+
         <p>press enter to play again</p>
     </div>
   </body>

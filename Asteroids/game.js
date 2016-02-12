@@ -32,6 +32,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
 
 
     this.addAsteroids(this.numAsteroids, this.bigRadius);
+    this.addSmallAsteroids(this.asteroids[0]);
   };
 
   Asteroids.Game.prototype.randPosition = function () {
