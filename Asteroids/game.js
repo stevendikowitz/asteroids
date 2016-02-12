@@ -151,7 +151,9 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
           this.numAsteroids = Math.floor(this.numAsteroids * 1.5);
           this.addAsteroids(this.numAsteroids, this.bigRadius);
           this.level += 1;
+          this.lives += 1;
           this.score += 1000;
+          this.ship.setInvulnerable();
         }
       }
     }
@@ -163,7 +165,9 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     }
 
     if (object === this.ship) {
-      this.removeLife();
+      if (!object.invulnerable) {
+        this.removeLife();
+      }
     }
   };
 

@@ -16,6 +16,8 @@
     this.rightTurn = false;
     this.friction = 1;
     this.thrust = false;
+    this.invulnerable = true;
+    setTimeout(function(){this.invulnerable = false;}.bind(this), 3000);
   };
 
   Asteroids.Util.inherits(Ship, Asteroids.MovingObject);
@@ -23,6 +25,7 @@
   Ship.prototype.relocate = function () {
     this.pos = this.game.randPosition();
     this.vel = [0, 0];
+    this.setInvulnerable();
   };
 
   // Ship.prototype.power = function (impulse) {
@@ -32,6 +35,11 @@
 
   Ship.prototype.setAngle = function(angleDiff){
     this.angle += (angleDiff * this.rotateSpeed);
+  };
+
+  Ship.prototype.setInvulnerable = function(){
+    this.invulnerable = true;
+    setTimeout(function(){this.invulnerable = false;}.bind(this), 3000);
   };
 
 
@@ -108,6 +116,22 @@
       ctx.drawImage(Ship.sprite, -40, -10, 70, 80);
       // ctx.drawImage(Ship.sprite, 0, 0, 70, 70, -30, -30, 64, 64);
       ctx.restore();
+
+      if (this.invulnerable){
+        ctx.save();
+        ctx.fillStyle = "rgba(20, 255, 20, 0.2)";
+        ctx.beginPath();
+        ctx.arc(
+          this.pos[0],
+          this.pos[1],
+          this.radius + 10,
+          0,
+          2 * Math.PI,
+          true
+        );
+        ctx.fill();
+        ctx.restore();
+      }
 
 
     };
