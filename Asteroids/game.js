@@ -25,11 +25,13 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     this.gameOver = false;
     this.score = 0;
     this.stop = true;
-
+    this.numAsteroids = 6;
     this.asteroids = [];
-    for (var i = 0; i < NUM_ASTEROIDS; i++) {
-      this.asteroids.push(this.addAsteroids());
-    }
+    this.smallRadius = 25;
+    this.bigRadius = 50;
+
+
+    this.addAsteroids(this.numAsteroids, this.bigRadius);
   };
 
   Asteroids.Game.prototype.randPosition = function () {
@@ -38,8 +40,17 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     return [xPos, yPos];
   };
 
-  Asteroids.Game.prototype.addAsteroids = function () {
-    return new Asteroids.Asteroid({pos: this.randPosition(), game: this});
+  Asteroids.Game.prototype.addAsteroids = function (num, radius) {
+    for (var i = 0; i < num; i++) {
+      this.asteroids.push(new Asteroids.Asteroid({pos: this.randPosition(), game: this, radius: radius}));
+    }
+  };
+
+  Asteroids.Game.prototype.addSmallAsteroids = function (bigAsteroid) {
+    var vel = bigAsteroid.vel;
+    var pos = bigAsteroid.pos;
+    this.asteroids.push(new Asteroids.Asteroid({pos: [pos[0] + 50, pos[1] + 50], vel: [vel[0] * 2, vel[1] * -2], game: this, radius: this.smallRadius}));
+    this.asteroids.push(new Asteroids.Asteroid({pos: [pos[0] - 50, pos[1] - 50], vel: [vel[0] * -2, vel[1] * -2], game: this, radius: this.smallRadius}));
   };
 
   Game.prototype.allObjects = function () {
@@ -119,6 +130,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
 
     if ( this.lives !== 0 ) {
       this.lives -= 1;
+      this.ship.relocate();
     } else {
       this.gameOver = true;
     }
@@ -131,6 +143,15 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
       if (i !== -1) {
         this.asteroids.splice(i, 1);
         this.score += 100;
+        if ( object.radius === 50 ) {
+          this.addSmallAsteroids(object);
+        }
+        if ( this.asteroids.length === 0 ) {
+          this.numAsteroids = Math.floor(this.numAsteroids * 1.5);
+          this.addAsteroids(this.numAsteroids, this.bigRadius);
+          this.level += 1;
+          this.score += 1000;
+        }
       }
     }
     if (object.bullet) {

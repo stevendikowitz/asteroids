@@ -8,17 +8,7 @@
     this.ctx = ctx;
     this.ship = this.game.ship;
     this.dims = this.game.dims;
-  };
-
-  GameView.MOVES = {
-        w: [ 0, -1],
-        a: [-1,  0],
-        s: [ 0,  1],
-        d: [ 1,  0],
-       up: [ 0, -1],
-     left: [-1,  0],
-     down: [ 0,  1],
-    right: [ 1,  0]
+    this.startAnimate = false;
   };
 
   GameView.prototype.bindKeyHandlers = function () {
@@ -26,9 +16,9 @@
         that = this,
         game = this.game;
 
-    Object.keys(GameView.MOVES).forEach(function(k) {
-      key('space', function () {ship.fireBullet();});
-    });
+
+    key('space', function () {ship.fireBullet();});
+
 
     $(document).on('keydown', this, function (e) {
       var char = String.fromCharCode(e.keyCode);
@@ -45,10 +35,12 @@
 
       if ( e.keyCode === 13 ) {
         game.stop = false;
-        game.gameOver = false;
         $(".new-game").removeClass("is-active");
         $(".game-over").removeClass("is-active");
-        that.animate();
+        if (!that.startAnimate) {
+          that.animate();
+          that.startAnimate = true;
+        }
       }
     }.bind(this));
 

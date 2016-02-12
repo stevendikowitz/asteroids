@@ -6,8 +6,8 @@
 
   var Asteroid = Asteroids.Asteroid = function (attr) {
     this.pos = attr.pos;
-    this.vel = Asteroids.Util.randomVec(2);
-    this.radius = 30;
+    this.vel = attr.vel || Asteroids.Util.randomVec(2);
+    this.radius = attr.radius;
     this.color = "#808080";
     this.game = attr.game;
     this.asteroid = true;
@@ -24,8 +24,10 @@
       Asteroid.sprite.src = './assets/deathstar.png';
 
     // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-      if (this.radius === 30){
-        ctx.drawImage(Asteroid.sprite, 0, 0, 60, 60);
+      if (this.radius === 25){
+        ctx.drawImage(Asteroid.sprite, -25, -25, 50, 50);
+      } else {
+        ctx.drawImage(Asteroid.sprite, -50, -50, 100, 100);
       }
 
     ctx.restore();
