@@ -61,9 +61,16 @@
         margin-bottom: 0;
       }
 
-      .modal > p {
+      .modal > marquee {
+        height: 100px;
+      }
+
+      .modal > marquee > p {
         padding: 0;
         margin: 0;
+        overflow: hidden;
+	      transform-origin: 50% 100%;
+        transform: perspective(300px) rotateX(35deg);
       }
 
       .new-game {
@@ -109,15 +116,15 @@
     </script>
     <div class="modal new-game is-active">
       <h1>asteroids</h1>
-      <p>move and turn with wad or arrow keys<p>
-      <p>space to fire</p>
-      <p>enter to start</p>
-
+      <marquee scrollamount="3" behavior="scroll" direction="up">
+        <p>move and turn with wad or arrow keys<p>
+        <p>space to fire</p>
+        <p>enter to start</p>
+      </marquee>
     </div>
 
       <div class="modal game-over">
         <h1>game over!</h1>
-
         <p>press enter to play again</p>
     </div>
   </body>

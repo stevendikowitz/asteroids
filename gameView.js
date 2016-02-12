@@ -40,6 +40,7 @@
         if (!that.startAnimate) {
           that.animate();
           that.startAnimate = true;
+          ship.setInvulnerable();
         }
       }
     }.bind(this));

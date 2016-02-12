@@ -56,13 +56,19 @@
 
 
       var bulletOptions = {
-        vel: [this.vel[0] * 3, this.vel[1] * 3],
+        vel: [(this.vel[0] * 3), (this.vel[1] * 3)],
         pos: forwardPos,
         game: this.game,
         radius: this.radius,
         angle: this.angle,
         thrust: this.thrust
       };
+
+      if (bulletOptions.vel[0] === 0 && bulletOptions.vel[1] === 0) {
+        bulletOptions.vel = [2.5, 2.5];
+      }
+
+
 
       var bullet = new Asteroids.Bullet(bulletOptions);
         this.game.add(bullet);
@@ -113,7 +119,7 @@
 
       // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       // ctx.drawImage(Ship.sprite, 10, 20, 20, 20, 10, 10, 40, 40);
-      ctx.drawImage(Ship.sprite, -40, -10, 70, 80);
+      ctx.drawImage(Ship.sprite, -40, -40, 80, 80);
       // ctx.drawImage(Ship.sprite, 0, 0, 70, 70, -30, -30, 64, 64);
       ctx.restore();
 
