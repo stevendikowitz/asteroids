@@ -8,10 +8,27 @@
         padding: 0px;
         margin: 0px;
       }
+
       canvas {
         background-color: black;
         background-image: url("assets/outerspace2.jpg");
       }
+
+      .modal {
+        display: none;
+      }
+
+      .new-game {
+        display: none;
+      }
+
+    .game-over {
+      display: none;
+    }
+
+    .is-active {
+       display: block;
+     }
 
     </style>
   </head>
@@ -37,6 +54,23 @@
         ctx
       ).start(canvasEl);
     </script>
+    <div class="new-game is-active">
+      <div class="modal-close">X</div>
+      <header>
+      <h1>Asteroids</h1>
+      <p>Move and turn with WAD or arrow keys<p>
+      <p>Space to fire</p>
+      <p>Enter to start</p>
+      </header>
+    </div>
+
+      <div class="game-over">
+        <div class="modal-close modal-close-gameover">X</div>
+        <header>
+          <h1>Game Over!</h1>
+        </header>
+        <p> Play again!</p>
+    </div>
   </body>
 
 </html>

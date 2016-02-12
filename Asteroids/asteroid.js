@@ -15,29 +15,22 @@
 
   Asteroids.Util.inherits(Asteroid, Asteroids.MovingObject);
 
-  // Asteroid.sprite = new Image();
-  //
-  // Asteroid.prototype.draw = function(ctx){
-  //
-  //   ctx.save();
-  //   ctx.translate(this.pos[0], this.pos[1]);
-  //
-  //   ctx.rotate((this.angle + 90) * Math.PI/180);
-  //
-  //   Asteroid.sprite.src = './assets/deathstar.png';
-  //
-  //   // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-  //   if (this.radius === 30){
-  //
-  //     ctx.drawImage(Asteroid.sprite, 70, 70, 70, 70);
-  //   }
-  //   else{
-  //     ctx.drawImage(Asteroid.sprite, 0, 140, 90, 90, -20, -20, 50, 50);
-  //   }
-  //
-  //   ctx.restore();
-  //
-  // };
+  Asteroid.sprite = new Image();
+
+  Asteroid.prototype.draw = function(ctx){
+    ctx.save();
+      ctx.translate(this.pos[0], this.pos[1]);
+      ctx.rotate((this.angle + 90) * Math.PI/180);
+      Asteroid.sprite.src = './assets/deathstar.png';
+
+    // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      if (this.radius === 30){
+        ctx.drawImage(Asteroid.sprite, 0, 0, 60, 60);
+      }
+
+    ctx.restore();
+
+  };
 
 
 })();

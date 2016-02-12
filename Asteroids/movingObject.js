@@ -60,28 +60,23 @@
   };
 
   MovingObject.prototype.collideWith = function (otherObject) {
-
-    var ship = this.game.ship;
-    var asteroid = Asteroids.Asteroid;
-    // debugger
-    if (this !== ship && !otherObject.bullet ) {
-      this.game.remove(this);
-      this.game.remove(otherObject);
-     }
+    var ship = this.game.ship,
+        asteroid = Asteroids.Asteroid,
+        game = this.game;
 
      if (this.asteroid && otherObject.bullet || this.bullet && otherObject.asteroid) {
-       this.game.remove(this);
-       this.game.remove(otherObject);
+       game.remove(this);
+       game.remove(otherObject);
      }
 
      if (this === ship && otherObject.asteroid) {
-       this.game.remove(ship);
        ship.relocate();
-       this.game.remove(otherObject);
+       game.remove(ship);
+       game.remove(otherObject);
      } else if (this.asteroid && otherObject === ship) {
        ship.relocate();
-       this.game.remove(this);
-       this.game.remove(ship);
+       game.remove(this);
+       game.remove(ship);
      }
 
   };

@@ -7,6 +7,7 @@
     this.game = game;
     this.ctx = ctx;
     this.ship = this.game.ship;
+
   };
 
   GameView.MOVES = {
@@ -47,6 +48,11 @@
     if ( char.toLowerCase() === "w" || char === "&") {
       ship.thrust = true;
     }
+
+    if ( e.keyCode === 13 ) {
+      this.game.stop = false;
+      $(".new-game").removeClass("is-active");
+    }
   }.bind(this));
 
   $(document).on('keyup', this, function (e) {
@@ -73,15 +79,22 @@
    };
 
    GameView.prototype.animate = function(time){
+     if ( this.game.gameOver ) {
+       this.gameOver();
+     }
+
      var timeDelta = time - this.lastTime;
-
-     this.game.step(timeDelta);
-     this.game.draw(this.ctx);
-     this.lastTime = time;
-
-     //every call to animate requests causes another call to animate
-     requestAnimationFrame(this.animate.bind(this));
+     if ( !this.game.stop ) {
+       this.game.step(timeDelta);
+       this.game.draw(this.ctx);
+       this.lastTime = time;
+       requestAnimationFrame(this.animate.bind(this));
+     }
    };
 
+   GameView.prototype.gameOver = function(){
+     this.game.stop = true;
+     $(".game-over").addClass("is-active");
+   };
 
 })();

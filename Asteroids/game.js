@@ -12,7 +12,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
 
   var DIM_X = 800;
   var DIM_Y = 600;
-  var NUM_ASTEROIDS = 4;
+  var NUM_ASTEROIDS = 6;
 
   var Game = Asteroids.Game = function () {
     this.dim_x = DIM_X;
@@ -23,6 +23,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     this.lives = 3;
     this.gameOver = false;
     this.score = 0;
+    this.stop = false;
 
     this.asteroids = [];
     for (var i = 0; i < NUM_ASTEROIDS; i++) {
@@ -59,6 +60,10 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
       object.move(delta);
     });
 
+  };
+
+  Game.prototype.startAnimate = function () {
+    Asteroids.GameView.start();
   };
 
   Game.prototype.wrap = function (pos) {
@@ -110,6 +115,15 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     this.checkCollisions();
   };
 
+  Game.prototype.removeLife = function(){
+
+    if ( this.lives !== 0 ) {
+      this.lives -= 1;
+    } else {
+      this.gameOver = true;
+    }
+  };
+
   Game.prototype.remove = function (object) {
     var i;
     if (object.asteroid) {
@@ -127,7 +141,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     }
 
     if (object === this.ship) {
-      this.lives -= 1;
+      this.removeLife();
     }
   };
 
@@ -137,10 +151,10 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     ctx.clearRect(0,0, ctx.canvas.width,ctx.canvas.height);
       ctx.fillStyle = "#fff";
       ctx.font="20px Arial";
-      ctx.fillText("Level: " + this.level,(ctx.canvas.width / 2) - 50,20);
-      ctx.fillText("Asteroids remaining: " + this.asteroids.length,30,20);
-      ctx.fillText("Score: " + this.score,ctx.canvas.width - 200,20);
-      ctx.fillText("Lives:  " + this.lives, ctx.canvas.width - 200,50);
+      ctx.fillText("Level: " + this.level, (ctx.canvas.width / 2) - 50, 20);
+      ctx.fillText("Asteroids remaining: " + this.asteroids.length, 30, 20);
+      ctx.fillText("Score: " + this.score, ctx.canvas.width - 150, 20);
+      ctx.fillText("Lives:  " + this.lives, ctx.canvas.width - 150, 50);
     ctx.restore();
     this.allObjects().forEach(function(obj){
       obj.draw(ctx);

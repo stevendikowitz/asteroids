@@ -11,9 +11,8 @@
     var vel = bulletOptions.vel,
         angle = bulletOptions.angle,
         thrust = bulletOptions.thrust;
-    // options.radius = Bullet.RADIUS;
-    // this.bullet = true;
-    // Asteroids.MovingObject.call(this, options);
+
+    this.bullet = true;
 
     var newVel = Asteroids.Util.calcVec(0.65, angle);
 
