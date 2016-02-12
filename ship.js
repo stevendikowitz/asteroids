@@ -56,13 +56,19 @@
 
 
       var bulletOptions = {
-        vel: [this.vel[0] * 3, this.vel[1] * 3],
+        vel: [(this.vel[0] * 3), (this.vel[1] * 3)],
         pos: forwardPos,
         game: this.game,
         radius: this.radius,
         angle: this.angle,
         thrust: this.thrust
       };
+
+      if (bulletOptions.vel[0] === 0 && bulletOptions.vel[1] === 0) {
+        bulletOptions.vel = [2.5, 2.5];
+      }
+
+
 
       var bullet = new Asteroids.Bullet(bulletOptions);
         this.game.add(bullet);
