@@ -7,13 +7,26 @@
       html, body, canvas {
         padding: 0px;
         margin: 0px;
+        font-family: 'ARCADECLASSIC';
+      }
+
+      @font-face {
+        font-family: 'starjedi';
+        src: url('vendor/starjedi.ttf');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        font-family: 'starjedi';
       }
 
       canvas {
         background-color: black;
         background-image: url("assets/outerspace2.jpg");
-        width: 100vw;
-        height: 100vh;
+        background-size: 100%;
+        margin: auto;
+        display: block;
       }
 
       .modal {
@@ -73,21 +86,19 @@
       ).start(canvasEl);
     </script>
     <div class="modal new-game is-active">
-      <div class="modal-close">X</div>
       <header>
-      <h1>Asteroids</h1>
-      <p>Move and turn with WAD or arrow keys<p>
-      <p>Space to fire</p>
-      <p>Enter to start</p>
+      <h1>asteroids</h1>
+      <p>move and turn with wad or arrow keys<p>
+      <p>space to fire</p>
+      <p>enter to start</p>
       </header>
     </div>
 
       <div class="modal game-over">
-        <div class="modal-close modal-close-gameover">X</div>
         <header>
-          <h1>Game Over!</h1>
+          <h1>game over!</h1>
         </header>
-        <p> Play again!</p>
+        <p> play again!</p>
     </div>
   </body>
 

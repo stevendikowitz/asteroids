@@ -150,7 +150,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     ctx.save();
     ctx.clearRect(0,0, ctx.canvas.width,ctx.canvas.height);
       ctx.fillStyle = "#fff";
-      ctx.font="20px Arial";
+      ctx.font="20px starjedi";
       ctx.fillText("Level: " + this.level, (ctx.canvas.width / 2) - 50, 20);
       ctx.fillText("Asteroids remaining: " + this.asteroids.length, 30, 20);
       ctx.fillText("Score: " + this.score, ctx.canvas.width - 150, 20);
