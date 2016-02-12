@@ -10,11 +10,13 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     window.Asteroids = {};
   }
 
+  // var DIM_X = 800;
+  // var this.DIM_Y = 600;
   var NUM_ASTEROIDS = 6;
 
   var Game = Asteroids.Game = function (dims) {
-    this.DIM_X = dims.DIM_X;
-    this.DIM_Y = dims.DIM_Y;
+    this.DIM_X = 800;
+    this.DIM_Y = 600;
     this.ship = new Asteroids.Ship ({pos: [this.DIM_X / 2, this.DIM_Y / 2], game: this});
     this.bullets = [];
     this.level = 1;
