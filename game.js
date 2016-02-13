@@ -173,6 +173,9 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
   Game.prototype.draw = function (ctx) {
     ctx.save();
     ctx.clearRect(0,0, ctx.canvas.width,ctx.canvas.height);
+    this.allObjects().forEach(function(obj){
+      obj.draw(ctx);
+    });
       ctx.fillStyle = "#fff";
       ctx.font="20px starjedi";
       ctx.fillText("Level: " + this.level, (ctx.canvas.width / 2) - 50, 20);
@@ -180,9 +183,6 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
       ctx.fillText("Score: " + this.score, ctx.canvas.width - 150, 20);
       ctx.fillText("Lives:  " + this.lives, ctx.canvas.width - 150, 50);
     ctx.restore();
-    this.allObjects().forEach(function(obj){
-      obj.draw(ctx);
-    });
   };
 
 
