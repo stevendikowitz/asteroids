@@ -3,6 +3,9 @@
     window.Asteroids = {};
   }
 
+
+
+
   var GameView = Asteroids.GameView = function (game, ctx) {
     this.game = game;
     this.ctx = ctx;
@@ -17,7 +20,10 @@
         game = this.game;
 
 
-    key('space', function () {ship.fireBullet();});
+    key('space', function () {
+      ship.fireBullet();
+      Asteroids.Sound.fire.play();
+    });
 
 
     $(document).on('keydown', this, function (e) {
@@ -34,13 +40,18 @@
       }
 
       if ( e.keyCode === 13 ) {
+        Asteroids.Sound.theme.stop();
+        Asteroids.Sound.lightsaber.play();
         game.stop = false;
         $(".new-game").removeClass("is-active");
         $(".game-over").removeClass("is-active");
         if (!that.startAnimate) {
+          Asteroids.Sound.empire._loop = true;
+          Asteroids.Sound.empire.play();
           that.animate();
           that.startAnimate = true;
           ship.setInvulnerable();
+
         }
       }
     }.bind(this));
@@ -69,6 +80,7 @@
      this.lastTime = 0;
      //start the animation
      requestAnimationFrame(this.animate.bind(this));
+     Asteroids.Sound.theme.play();
    };
 
    GameView.prototype.animate = function(time){
@@ -86,6 +98,9 @@
    };
 
    GameView.prototype.gameOver = function(){
+     Asteroids.Sound.empire._loop = false;
+     Asteroids.Sound.empire.stop();
+     Asteroids.Sound.failed.play();
      this.game.stop = true;
      $(".game-over").addClass("is-active");
      var newGame = new Asteroids.Game(this.dims);

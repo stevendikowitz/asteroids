@@ -10,8 +10,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     window.Asteroids = {};
   }
 
-  // var DIM_X = 800;
-  // var this.DIM_Y = 600;
+
   var NUM_ASTEROIDS = 6;
 
   var Game = Asteroids.Game = function (dims) {
@@ -74,9 +73,6 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
 
   };
 
-  Game.prototype.startAnimate = function () {
-    Asteroids.GameView.start();
-  };
 
   Game.prototype.wrap = function (pos) {
     var origX = pos[0];
@@ -142,6 +138,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
     if (object.asteroid) {
       i = this.asteroids.indexOf(object);
       if (i !== -1) {
+        Asteroids.Sound.explode.play();
         this.asteroids.splice(i, 1);
         this.score += 100;
         if ( object.radius === 50 ) {
@@ -153,6 +150,7 @@ Keeps track of dimensions of the space; wraps objects around when they drift off
           this.level += 1;
           this.lives += 1;
           this.score += 1000;
+          Asteroids.Sound.vader.play();
           this.ship.setInvulnerable();
         }
       }
