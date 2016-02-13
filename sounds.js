@@ -12,12 +12,6 @@ var Sound = Asteroids.Sound = {
     buffer: true
   }),
 
-  gameover: new Howl({
-    urls: ['sounds/rebel-theme.wav'],
-    volume: 0.5,
-    buffer: true
-  }),
-
   theme: new Howl({
     urls: ['sounds/sw_theme.wav'],
     volume: 0.5,
