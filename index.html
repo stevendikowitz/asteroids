@@ -108,11 +108,12 @@
       canvasEl.height = window.innerHeight;
       var dims = {DIM_X: canvasEl.width, DIM_Y: canvasEl.height};
       // debugger
-      var game = new Asteroids.Game(dims);
+      // var game = new Asteroids.Game(dims);
       // var game = new Asteroids.Game();
       var ctx = canvasEl.getContext("2d");
       new Asteroids.GameView(
-        game,
+        canvasEl,
+        dims,
         ctx
       ).start(canvasEl);
     </script>
