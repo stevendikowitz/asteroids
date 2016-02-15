@@ -29,6 +29,12 @@
         font-family: 'starjedi';
       }
 
+      .group {
+        display: block;
+        content: "";
+        clear: both;
+      }
+
       canvas {
         background-color: black;
         background-image: url("assets/outerspace2.jpg");
@@ -50,7 +56,7 @@
         background: -webkit-linear-gradient(top, #fff, #ccc);
         box-shadow: 0 2px 3px rgba(0,0,0,0.3);
         border-radius: 5px;
-        max-height: 300px;
+        min-height: 300px;
         letter-spacing: 1px;
       }
 
@@ -90,7 +96,29 @@
        text-align: center;
      }
 
+     .paused > h3 {
+       text-align: center;
+     }
+
      .game-over > p {
+       text-align: center;
+     }
+
+     .group > p {
+       float: left;
+       margin-top: 0;
+     }
+     .group > button {
+       float: right;
+     }
+
+     ul {
+       width: 350px;
+     }
+
+     .controls {
+       margin-top: 60px;
+       font-size: 14px;
        text-align: center;
      }
 
@@ -144,15 +172,17 @@
         <h1>paused</h1>
         <h3>upgrades</h3>
   <ul>
-    <li>invulnerability(3s): 1000<button class="shields button">Upgrade</button></li>
-    <li>reload speed: 2000<button class="reload button">Upgrade</button></li>
-    <li>ship speed: 1000<button class="speed button">Upgrade</button></li>
-    <li>add life: 5000<button class="add-life button">Upgrade</button></li>
+    <li class="group"><p>invulnerability (3s)</p><button class="shields button">1000</button></li>
+    <li class="group"><p>reload speed</p><button class="reload button">2000</button></li>
+    <li class="group"><p>ship speed</p><button class="speed button">1000</button></li>
+    <li class="group"><p>add life</p><button class="add-life button">5000</button></li>
   </ul>
+      <div class="controls">
         <p>p to resume</p>
         <p>move and turn with wad or arrow keys<p>
         <p>space to fire</p>
         <p>m to toggle sound</p>
+      </div>
     </div>
   </body>
 
