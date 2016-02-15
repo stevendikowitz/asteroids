@@ -66,6 +66,7 @@
       }
 
       .modal > marquee > p {
+        text-align: center;
         padding: 0;
         margin: 0;
         overflow: hidden;
@@ -83,6 +84,14 @@
 
     .is-active {
        display: block;
+     }
+
+     .paused > p {
+       text-align: center;
+     }
+
+     .game-over > p {
+       text-align: center;
      }
 
     </style>
@@ -122,12 +131,17 @@
         <p>move and turn with wad or arrow keys<p>
         <p>space to fire</p>
         <p>enter to start</p>
+        <p>p to pause</p>
       </marquee>
     </div>
 
       <div class="modal game-over">
         <h1>game over!</h1>
         <p>press enter to play again</p>
+    </div>
+      <div class="modal paused">
+        <h1>Paused</h1>
+        <p>p to resume</p>
     </div>
   </body>
 
