@@ -154,9 +154,6 @@
       canvasEl.width = window.innerWidth;
       canvasEl.height = window.innerHeight;
       var dims = {DIM_X: canvasEl.width, DIM_Y: canvasEl.height};
-      // debugger
-      // var game = new Asteroids.Game(dims);
-      // var game = new Asteroids.Game();
       var ctx = canvasEl.getContext("2d");
       new Asteroids.GameView(
         canvasEl,
@@ -169,9 +166,9 @@
       <marquee class="marquee" scrollamount="2" behavior="scroll" direction="up">
         <p>move and turn with wad or arrow keys<p>
         <p>space to fire</p>
-        <p>enter to start</p>
         <p>p to pause and enter upgrade store</p>
         <p>m to toggle sound</p>
+        <p>enter to start</p>
       </marquee>
     </div>
 
