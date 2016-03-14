@@ -1,6 +1,6 @@
 # Asteroids
 
-[!asteroids](./assets/asteroids.PNG)](http://stevendikowitz.com/asteroids/)
+[![asteroids](./assets/asteroids.PNG)](http://stevendikowitz.com/asteroids/)
 ![asteroids]
 
 The classic arcade shooter Asteroids with a Star Wars theme because, why not? Created quickly because I wanted a fun project to practice HTML5/Canvas, and designing physics logic (movement, rotation, friction, collision detection, etc).
