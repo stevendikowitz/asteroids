@@ -1,13 +1,12 @@
 # Asteroids
 
 [![asteroids](./assets/asteroids.PNG)](http://stevendikowitz.com/asteroids/)
-![asteroids]
 
 The classic arcade shooter Asteroids with a Star Wars theme because, why not? Created quickly because I wanted a fun project to practice HTML5/Canvas, and designing physics logic (movement, rotation, friction, collision detection, etc).
 
 ## Controls
 
-![newgame]
+[![newgame](./assets/newgame.PNG)](http://stevendikowitz.com/asteroids/)
 
 * Shoot with **space**
 * Move with **wad** or **arrow** keys
@@ -16,7 +15,7 @@ The classic arcade shooter Asteroids with a Star Wars theme because, why not? Cr
 
 ## Upgrades
 
-![store]
+[![store](./assets/store.PNG)](http://stevendikowitz.com/asteroids/)
 
 Upgrades can be purchased with points. Current upgrades in the store are:
 * Invincibility (3 seconds)
